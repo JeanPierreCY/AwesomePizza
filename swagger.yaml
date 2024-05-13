@@ -1,0 +1,240 @@
+swagger: '2.0'
+info:
+  description: Api Documentation
+  version: '1.0'
+  title: Api Documentation
+  termsOfService: urn:tos
+  contact: {}
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+host: localhost:8080
+basePath: /
+tags:
+  - name: portal-controller
+    description: Portal Controller
+paths:
+  /createOrder:
+    post:
+      tags:
+        - portal-controller
+      summary: createOrder
+      operationId: createOrderUsingPOST
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: pizza
+          description: pizza
+          required: true
+          schema:
+            $ref: '#/definitions/Pizza'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AwesomePizzaOrder'
+        '400':
+          description: Bad request
+          schema:
+              $ref: '#/definitions/errorResponse'
+        '500':
+          description: Internal server error
+          schema:
+              $ref: '#/definitions/errorResponse'
+      deprecated: false
+  /orders/{id}:
+    get:
+      tags:
+        - portal-controller
+      summary: getOrderById
+      operationId: getOrderByIdUsingGET
+      produces:
+        - '*/*'
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AwesomePizzaOrder'
+        '400':
+          description: Bad request
+          schema:
+              $ref: '#/definitions/errorResponse'
+        '404':
+          description: Not Found
+          schema:
+              $ref: '#/definitions/errorResponse'
+        '500':
+          description: Internal server error
+          schema:
+              $ref: '#/definitions/errorResponse'
+      deprecated: false
+  /orders:
+    get:
+      tags:
+        - portal-controller
+      summary: getAllOrders
+      operationId: getAllOrdersUsingGET
+      produces:
+        - '*/*'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AwesomePizzaOrder'
+        '500':
+          description: Internal server error
+          schema:
+              $ref: '#/definitions/errorResponse'
+      deprecated: false
+  /updateAllNotCompletedOrders:
+    put:
+      tags:
+        - portal-controller
+      summary: updateAllNotCompletedOrders
+      operationId: updateAllNotCompletedOrdersUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: newOrderState
+          description: newOrderState
+          required: true
+          schema:
+            $ref: '#/definitions/NewOrderStatus'
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AwesomePizzaOrder'
+        '400':
+          description: Bad request
+          schema:
+              $ref: '#/definitions/errorResponse'
+        '500':
+          description: Internal server error
+          schema:
+              $ref: '#/definitions/errorResponse'
+      deprecated: false
+  /updateOrder:
+    put:
+      tags:
+        - portal-controller
+      summary: updateOrder
+      operationId: updateOrderUsingPUT
+      consumes:
+        - application/json
+      produces:
+        - '*/*'
+      parameters:
+        - in: body
+          name: orderUpd
+          description: orderUpd
+          required: true
+          schema:
+            $ref: '#/definitions/OrderUpd'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AwesomePizzaOrder'
+        '400':
+          description: Bad request
+          schema:
+              $ref: '#/definitions/errorResponse'
+        '404':
+          description: Not Found
+          schema:
+              $ref: '#/definitions/errorResponse'
+        '500':
+          description: Internal server error
+          schema:
+              $ref: '#/definitions/errorResponse'
+      deprecated: false
+definitions:
+  AwesomePizzaOrder:
+    type: object
+    properties:
+      id:
+        type: integer
+      pizza:
+        $ref: '#/definitions/Pizza'
+      status:
+        type: string
+        description: order status
+        enum:
+          - ORDERED
+          - READY
+          - DELIVERED
+          - COMPLETED
+          - CANCELED
+      timestamp:
+        type: string
+    title: AwesomePizzaOrder
+  errorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: errorCode
+          example: string
+        errorMessage:
+          type: string
+          description: error description
+          example: string
+  NewOrderStatus:
+    type: object
+    properties:
+      newOrderStatus:
+        type: string
+        description: new order status to give
+        enum:
+          - ORDERED
+          - READY
+          - DELIVERED
+          - COMPLETED
+          - CANCELED
+    title: NewOrderStatus
+  OrderUpd:
+    type: object
+    properties:
+      newOrderStatus:
+        type: string
+        description: new order status to give
+        enum:
+          - ORDERED
+          - READY
+          - DELIVERED
+          - COMPLETED
+          - CANCELED
+      orderId:
+        type: integer
+    title: OrderUpd
+  Pizza:
+    type: object
+    properties:
+      name:
+        type: string
+        description: name of the pizza
+      size:
+        type: string
+        description: size of the pizza
+        enum:
+          - S
+          - M
+          - L
+    title: Pizza
