@@ -1,33 +1,29 @@
-HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+/target/
+/*.bat
+/*.bat.args
+/*.bat.bytecode.args
+/*.bat.fileno
+/*.fpr
+/.settings/
+/.classpath
+/bin/
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+# ###############################################
+# Eclipse metadata files that can be ignored  
+.classpath  
+.editorconfig  
+.factorypath  
+.gitattributes  
+.project  
+.settings/  
+bin/  
+  
+target/  
+# maven project related ignore files and directories  
+.mvn/  
+target/  
 
-### IntelliJ IDEA ###
-.idea
-*.iws
+# ###############################################
+# Intellij
+.idea/
 *.iml
-*.ipr
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
-.vscode/
