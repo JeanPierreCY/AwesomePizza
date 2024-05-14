@@ -6,10 +6,8 @@ import java.math.BigInteger;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import com.awesomepizza.portal.model.AwesomePizzaOrder;
 import com.awesomepizza.portal.model.NewOrderStatus;
@@ -21,7 +19,6 @@ import com.awesomepizza.portal.model.exception.PizzaStatusException;
 import com.awesomepizza.portal.repository.PortalRepository;
 
 @SpringBootTest
-@RunWith(SpringRunner.class)
 class ControllerTest {
 	
 	@Autowired
